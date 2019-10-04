@@ -1,4 +1,5 @@
-# Copyright 2018-present Open Networking Foundation
+---
+# Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: bbsim
-description: Broadband Simulator
-icon: https://guide.opencord.org/logos/cord.svg
-
-version: 2.1.0
-appVersion: 2.1.0
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: start-remote-stream
+data:
+  start-remote-stream.sh: |+
+    #!/bin/bash
+    while true; do ffmpeg -re -i /opt/cdn/movies/{{ .Values.remote_streaming.video_quality }}.mp4 -c copy -f flv rtmp://{{ .Values.remote_streaming.antmedia_ip }}:30935/LiveApp/{{ .Values.stream_name }}; done

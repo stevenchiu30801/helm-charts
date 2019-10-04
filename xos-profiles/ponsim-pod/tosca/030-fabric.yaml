@@ -27,15 +27,17 @@ description: Configures the Ponsim SEBA POD fabric
 topology_template:
   node_templates:
     # Fabric configuration
-    switch#leaf_1:
+    switch#agg_1:
       type: tosca.nodes.Switch
       properties:
-        driver: ofdpa-ovs
+        driver: "stratum-bmv2"
+        pipeconf: "org.onosproject.pipelines.fabric.bmv2"
+        managementAddress: "grpc://mininet-openflow:50001?device_id=1"
         ipv4Loopback: 192.168.0.201
         ipv4NodeSid: 17
         isEdgeRouter: True
-        name: leaf_1
-        ofId: of:0000000000000001
+        name: AGG SWITCH
+        ofId: device:agg1
         routerMac: 00:00:02:01:06:01
 
     # Setup the OLT switch ports
@@ -48,7 +50,7 @@ topology_template:
         host_learning: false
       requirements:
         - switch:
-            node: switch#leaf_1
+            node: switch#agg_1
             relationship: tosca.relationships.BelongsToOne
 {{- end }}
 
@@ -59,7 +61,7 @@ topology_template:
         portId: 1
       requirements:
         - switch:
-            node: switch#leaf_1
+            node: switch#agg_1
             relationship: tosca.relationships.BelongsToOne
 
     # Setup the fabric switch port where the external
