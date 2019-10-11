@@ -77,7 +77,7 @@ if __name__ == '__main__':
     h2.cmd( 'mcjoin -s -i h2-eth0 -t 2 >& /tmp/mcjoin.log &')
 {{- end }}
 
-    agg1.start()
+#    agg1.start()
 
     net.start()
     CLI( net )

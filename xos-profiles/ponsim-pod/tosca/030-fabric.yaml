@@ -31,8 +31,8 @@ topology_template:
       type: tosca.nodes.Switch
       properties:
         driver: "stratum-bmv2"
-        pipeconf: "org.onosproject.pipelines.fabric.bmv2"
-        managementAddress: "grpc://mininet-openflow:50001?device_id=1"
+        pipeconf: "org.onosproject.pipelines.fabric"
+        managementAddress: "grpc://mininet-stratum:50001?device_id=1"
         ipv4Loopback: 192.168.0.201
         ipv4NodeSid: 17
         isEdgeRouter: True
@@ -87,7 +87,7 @@ topology_template:
           {
             "dhcpl2relay" : {
               "useOltUplinkForServerPktInOut" : false,
-              "dhcpServerConnectPoints" : [ "of:0000000000000001/1" ]
+              "dhcpServerConnectPoints" : [ "device:agg1/1" ]
             }
           }
       requirements:

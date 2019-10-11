@@ -23,8 +23,10 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  repository: xosproject/fabric-synchronizer
-  tag: "{{ .Chart.AppVersion }}"
+#  repository: xosproject/fabric-synchronizer
+#  tag: "{{ .Chart.AppVersion }}"
+  repository: matteoscandolo/fabric-synchronizer
+  tag: 2.2.3-dev
   pullPolicy: Always
 
 global:

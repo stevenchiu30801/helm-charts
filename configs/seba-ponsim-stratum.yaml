@@ -23,7 +23,11 @@ images:
     tag: '2.2-demo'
     pullPolicy: Always
   mininet:
-    repository: 'opennetworking/mn-stratum'
+#    repository: 'opennetworking/mn-stratum'
+# The `opennetworking/mn-stratum` image misses `bridge-utils` and `dnsmasq`
+# package, which causes an error when `/toposcripts/topo_mn_stratum.py` tries
+# to build LinuxBridge with `brctl` command.
+    repository: 'steven30801/mn-stratum'
     tag: 'latest'
     pullPolicy: Always
 
@@ -50,7 +54,7 @@ tt-workflow-driver:
 # in mininet chart
 # FIXME: is multicast working?
 enableMulticast: False
-topoScript: 'topo_mn_stratum.py'
+topoScript: '/toposcripts/topo_mn_stratum.py'
 
 # in ponsim-pod chart
 bandwidthProfiles: True
@@ -71,3 +75,17 @@ kafkaAppVersion: "2.0.0.SNAPSHOT"
 
 aaaAppUrl: "http://10.128.22.1:30160/aaa-app-2.0.0-SNAPSHOT.oar"
 aaaAppVersion: "2.0.0.SNAPSHOT"
+
+# fabric
+fabric:
+  enabled: true
+  # Whether the fabric uses Stratum or not, and the corresponding ONOS apps
+  # required to control the switch.
+  stratum:
+    enabled: true
+    driverAppId: "org.onosproject.drivers.bmv2"
+    # Pipeconfs might contain switch vendor-specific P4 configurations that
+    # cannot be made public. For this reason, an URL to the corresponding .oar
+    # file must be explicitelly provided.
+    pipeconfProvided: false
+    pipeconfAppId: "org.onosproject.pipelines.fabric"

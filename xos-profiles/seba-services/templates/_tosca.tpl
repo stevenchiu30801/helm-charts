@@ -159,7 +159,10 @@ topology_template:
         - owner:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
 
+
+{{- if and .fabric.stratum.enabled .fabric.stratum.pipeconfProvided }}
     onos_app#fabric-pipeconf:
       type: tosca.nodes.ONOSApp
       properties:
@@ -171,6 +174,17 @@ topology_template:
         - owner:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
+{{- else if and .fabric.stratum.enabled (not .fabric.stratum.pipeconfProvided) }}
+    onos_app#fabric-pipeconf:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: {{ .fabric.stratum.pipeconfAppId }}
+        app_id: {{ .fabric.stratum.pipeconfAppId }}
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
 
 {{- if .bng.embedded.enabled }}
     onos_app#bngc:
@@ -185,7 +199,6 @@ topology_template:
         - owner:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
-{{- end }}
 {{- end }}
 
     onos_app#netcfghostprovider:
@@ -398,7 +411,7 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
 {{- end }}
 
-{{- if .bng.external.enabled }}
+{{- if .bng.embedded.enabled }}
     service_dependency#onos_vrouter:
       type: tosca.nodes.ServiceDependency
       properties:

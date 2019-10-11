@@ -81,8 +81,8 @@ topology_template:
       properties:
         name: dhcpl2relay
         app_id: org.opencord.dhcpl2relay
-        url: {{ .dhcpl2relayAppUrl }}
-        version: {{ .dhcpl2relayAppVersion }}
+        url: {{ .Values.dhcpl2relayAppUrl }}
+        version: {{ .Values.dhcpl2relayAppVersion }}
         dependencies: org.opencord.sadis
       requirements:
         - owner:
