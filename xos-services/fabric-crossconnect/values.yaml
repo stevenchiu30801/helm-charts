@@ -23,13 +23,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-#  repository: 'xosproject/fabric-crossconnect-synchronizer'
-# The `xosproject/fabric-crossconnect-synchronzier` image would push Xconnect
-# configuration like { "deviceId": "...", "valnId": "...", "ports": [...] }
-# However, after ONOS version 1.15, it replaced `ports` field with `endpoints`.
-# Please refer to ${ONOS_ROOT}/apps/segmentrouting/app/src/main/java/org/onosproject/segmentrouting/xconnect/api/XconnectCodec.java
-# SiaB with Stratum should use ONOS version 2.2
-  repository: 'steven30801/fabric-crossconnect-synchronizer'
+  repository: 'xosproject/fabric-crossconnect-synchronizer'
   tag: '{{ .Chart.AppVersion }}'
   pullPolicy: 'Always'
 

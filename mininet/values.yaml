@@ -27,6 +27,9 @@ images:
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: IfNotPresent
 
+stratum:
+  enabled: false
+
 services:
   stratumServiceType: ClusterIP
   stratum:

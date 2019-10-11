@@ -55,6 +55,8 @@ tt-workflow-driver:
 # FIXME: is multicast working?
 enableMulticast: False
 topoScript: '/toposcripts/topo_mn_stratum.py'
+stratum:
+  enabled: true
 
 # in ponsim-pod chart
 bandwidthProfiles: True
@@ -79,6 +81,9 @@ aaaAppVersion: "2.0.0.SNAPSHOT"
 # fabric
 fabric:
   enabled: true
+  image:
+    repository: 'matteoscandolo/fabric-synchronizer'
+    tag: '2.2.3-dev'
   # Whether the fabric uses Stratum or not, and the corresponding ONOS apps
   # required to control the switch.
   stratum:
@@ -89,3 +94,14 @@ fabric:
     # file must be explicitelly provided.
     pipeconfProvided: false
     pipeconfAppId: "org.onosproject.pipelines.fabric"
+
+# fabric-crossconnect
+fabric-crossconnect:
+  image:
+# The `xosproject/fabric-crossconnect-synchronzier` image would push Xconnect
+# configuration like { "deviceId": "...", "valnId": "...", "ports": [...] }
+# However, after ONOS version 1.15, it replaced `ports` field with `endpoints`.
+# Please refer to ${ONOS_ROOT}/apps/segmentrouting/app/src/main/java/org/onosproject/segmentrouting/xconnect/api/XconnectCodec.java
+# SiaB with Stratum should use ONOS version 2.2
+    repository: 'xosproject/fabric-crossconnect-synchronizer'
+    tag: '1.3.0'
