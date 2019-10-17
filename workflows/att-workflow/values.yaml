@@ -40,5 +40,5 @@ xosAdminPassword: "letmein"
 aaaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/aaa-app/1.9.0/aaa-app-1.9.0.oar"
 aaaAppVersion: "1.9.0"
 
-dhcpl2relayAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/dhcpl2relay-app/2.0.0/dhcpl2relay-app-2.0.0.oar"
-dhcpl2relayAppVersion: "2.0.0"
+dhcpl2relayAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/dhcpl2relay-app/1.6.0/dhcpl2relay-app-1.6.0.oar"
+dhcpl2relayAppVersion: "1.6.0"
